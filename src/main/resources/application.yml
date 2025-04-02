@@ -1,0 +1,25 @@
+spring:
+  main:
+    web-application-type: none
+    banner-mode: off
+  ai:
+    mcp:
+      server:
+        name: openstack-mcp-server
+        version: 0.0.1
+
+logging:
+  pattern:
+    console:
+
+openstack:
+  authType: v3applicationcredential
+  authUrl: ""
+  identityApiVersion: "3"
+  regionName: ""
+  interface: public
+  applicationCredentialId: ""
+  applicationCredentialSecret: ""
+
+server:
+  port: 8080
