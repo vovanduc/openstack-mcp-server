@@ -1,0 +1,7 @@
+{
+    "mcpServers": {
+      "openstack-mcp-server": {
+        "command": "./start-mcp.sh"
+      }
+    }
+  }
