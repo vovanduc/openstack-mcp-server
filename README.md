@@ -11,7 +11,7 @@ This project is designed to work with the [Claude Desktop](https://www.anthropic
 - Java 21
 - Maven 3.8+
 - Spring Boot 3.4.4
-- Spring AI 1.0.0-M6
+- Spring AI 1.0.0-M7
 - OpenStack CLI installed on your machine
 
 ## Getting Started
