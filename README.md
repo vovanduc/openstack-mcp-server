@@ -25,39 +25,33 @@ Before you begin, ensure you have the following installed:
 
 ### Configuration
 
-1. **OpenStack Configuration**: Update the `application.yml` file with your OpenStack credentials.
-   - `authUrl`: Your OpenStack authentication URL.
-   - `regionName`: Your OpenStack region name.
-   - `applicationCredentialId`: Your OpenStack application credential ID.
-   - `applicationCredentialSecret`: Your OpenStack application credential secret.
+1. **OpenStack Configuration**: Create an `openstack.env` file with your OpenStack credentials.
+   ```bash
+   # Copy the template
+   cp openstack.env.template openstack.env
+   
+   # Edit with your actual values
+   OPENSTACK_AUTH_TYPE=v3applicationcredential
+   OPENSTACK_AUTH_URL=http://your-openstack-url:5000
+   OPENSTACK_IDENTITY_API_VERSION=3
+   OPENSTACK_REGION_NAME=your-region
+   OPENSTACK_INTERFACE=public
+   OPENSTACK_APPLICATION_CREDENTIAL_ID=your-credential-id
+   OPENSTACK_APPLICATION_CREDENTIAL_SECRET=your-credential-secret
+   ```
 
-```yaml
-spring:
-  main:
-    web-application-type: none
-    banner-mode: off
-  ai:
-    mcp:
-      server:
-        name: openstack-mcp-server
-        version: 0.0.1
+2. **Load Environment Variables**: Before running the application, load the environment variables:
+   ```bash
+   source load-env.sh
+   ```
 
-logging:
-  pattern:
-    console:
-
-openstack:
-  authType: v3applicationcredential
-  authUrl: <your_auth_url>
-  identityApiVersion: 3
-  regionName: <your_region_name>
-  interface: public
-  applicationCredentialId: "<your_application_credential_id>"
-  applicationCredentialSecret: "<your_application_credential_secret>"
-
-server:
-  port: 8080
-```
+3. **Alternative**: You can also set environment variables directly:
+   ```bash
+   export OPENSTACK_AUTH_URL=http://your-openstack-url:5000
+   export OPENSTACK_APPLICATION_CREDENTIAL_ID=your-credential-id
+   export OPENSTACK_APPLICATION_CREDENTIAL_SECRET=your-credential-secret
+   # ... other variables
+   ```
 
 ### Packaging
 

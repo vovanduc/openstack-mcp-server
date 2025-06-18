@@ -93,3 +93,10 @@ fabric.properties
 !.idea/runConfigurations
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all
+
+# Environment files with sensitive data
+.env
+*.env
+openstack.env
+secrets.yml
+application-prod.yml

@@ -60,6 +60,14 @@ public class OpenStackCommander {
             builder.redirectErrorStream(true);
 
             Map<String, String> env = builder.environment();
+            
+            // Add OpenStack path to existing PATH
+            String currentPath = env.getOrDefault("PATH", "");
+            String openstackPath = "/Users/vovanduc/.local/bin";
+            if (!currentPath.contains(openstackPath)) {
+                env.put("PATH", openstackPath + ":" + currentPath);
+            }
+            
             env.put("OS_AUTH_TYPE", authType);
             env.put("OS_AUTH_URL", authUrl);
             env.put("OS_IDENTITY_API_VERSION", apiVersion);
