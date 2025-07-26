@@ -261,6 +261,28 @@ openstack region list
 - Thử lại lệnh
 - Tăng timeout trong code nếu cần
 
+### 5. Lỗi "Could not find Application Credential" mặc dù đã cấu hình
+**Nguyên nhân**:
+Lỗi này xảy ra khi môi trường thực thi của lệnh `openstack` không nhận được các biến môi trường (ví dụ: `OS_APPLICATION_CREDENTIAL_ID`) đã được export. Điều này thường xảy ra khi chạy lệnh từ một script hoặc một ứng dụng (như MCP server) không kế thừa môi trường shell hiện tại của bạn.
+
+**Giải pháp 1: Kiểm tra thủ công (Recommended for Debugging)**
+Để xác nhận thông tin xác thực của bạn là đúng, hãy chạy lệnh `openstack` với tất cả các tham số được truyền trực tiếp. Thay thế các giá trị trong ngoặc nhọn `<...>` bằng thông tin của bạn từ file `openstack.env`.
+
+```bash
+openstack --os-auth-type v3applicationcredential \
+  --os-auth-url <YOUR_AUTH_URL> \
+  --os-identity-api-version 3 \
+  --os-region-name <YOUR_REGION> \
+  --os-interface public \
+  --os-application-credential-id <YOUR_CREDENTIAL_ID> \
+  --os-application-credential-secret '<YOUR_CREDENTIAL_SECRET>' \
+  server list
+```
+Nếu lệnh này thành công, điều đó chứng tỏ thông tin xác thực của bạn là chính xác và vấn đề nằm ở việc nạp biến môi trường.
+
+**Giải pháp 2: Cập nhật mã nguồn (Permanent Fix)**
+Chúng tôi đã cung cấp một bản cập nhật cho `OpenStackCommander.java` để nó tự động đọc file `openstack.env`. Điều này làm cho server hoạt động ổn định mà không cần dựa vào việc `source` file môi trường. Hãy đảm bảo bạn đang sử dụng phiên bản mới nhất của mã nguồn.
+
 ## 🛡️ Bảo mật
 
 ### Application Credentials
