@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class OpenStackCommander {
+
+    private static final Logger logger = Logger.getLogger(OpenStackCommander.class.getName());
 
     @Value("${openstack.authType}")
     private String authType;
@@ -40,6 +43,7 @@ public class OpenStackCommander {
      */
     @Tool(name = "run_openstack_command", description = "Run OpenStack command")
     public String runOpenStackCommand(String command) {
+        logger.info("Received OpenStack command: " + command);
         if (isOpenStackInstalled()) {
             return execute(command);
         } else {
